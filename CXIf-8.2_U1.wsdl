@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="CXIf"
+ targetNamespace="http://www.avstgroup.com/CXIf"
+ xmlns:tns="http://www.avstgroup.com/CXIf"
+ xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+ xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+ xmlns:nsm="http://www.avstgroup.com/CXIf"
+ xmlns:SOAP="http://schemas.xmlsoap.org/wsdl/soap/"
+ xmlns:MIME="http://schemas.xmlsoap.org/wsdl/mime/"
+ xmlns:DIME="http://schemas.xmlsoap.org/ws/2002/04/dime/wsdl/"
+ xmlns:WSDL="http://schemas.xmlsoap.org/wsdl/"
+ xmlns="http://schemas.xmlsoap.org/wsdl/">
+
+<types>
+
+ <schema targetNamespace="http://www.avstgroup.com/CXIf"
+  xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+  xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns:nsm="http://www.avstgroup.com/CXIf"
+  xmlns="http://www.w3.org/2001/XMLSchema"
+  elementFormDefault="qualified"
+  attributeFormDefault="qualified">
+  <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+  <!-- fault element -->
+  <element name="CXFault">
+   <complexType>
+    <sequence>
+     <element name="Error" type="xsd:unsignedLong" minOccurs="1" maxOccurs="1"/>
+     <element name="Description" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="true"/>
+    </sequence>
+   </complexType>
+  </element>
+  <complexType name="CXProcessXML">
+   <sequence>
+     <element name="XMLRequestData" minOccurs="0" maxOccurs="1" nillable="true"><complexType><sequence><any maxoccurs="1"/></sequence></complexType></element>
+   </sequence>
+  </complexType>
+  <!-- operation request element -->
+  <element name="CXProcessXML">
+   <complexType>
+    <sequence>
+     <element name="XMLRequestData" minOccurs="0" maxOccurs="1" nillable="true"><complexType><sequence><any maxoccurs="1"/></sequence></complexType></element>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="CXProcessXMLResponse">
+   <complexType>
+    <sequence>
+     <element name="XMLResponse" minOccurs="0" maxOccurs="1" nillable="true"><complexType><sequence><any maxoccurs="1"/></sequence></complexType></element>
+    </sequence>
+   </complexType>
+  </element>
+ </schema>
+
+</types>
+
+<message name="CXProcessXML">
+ <part name="parameters" element="nsm:CXProcessXML"/>
+</message>
+
+<message name="CXProcessXMLResponse">
+ <part name="parameters" element="nsm:CXProcessXMLResponse"/>
+</message>
+
+<message name="CXFaultFault">
+ <part name="fault" element="nsm:CXFault"/>
+</message>
+
+<portType name="CXIfPortType">
+ <operation name="CXProcessXML">
+  <documentation>Service definition of function nsm__CXProcessXML</documentation>
+  <input message="tns:CXProcessXML"/>
+  <output message="tns:CXProcessXMLResponse"/>
+  <fault name="CXFault" message="tns:CXFaultFault"/>
+ </operation>
+</portType>
+
+<binding name="CXIf" type="tns:CXIfPortType">
+ <SOAP:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+ <operation name="CXProcessXML">
+  <SOAP:operation soapAction=""/>
+  <input>
+     <SOAP:body parts="parameters" use="literal"/>
+  </input>
+  <output>
+     <SOAP:body parts="parameters" use="literal"/>
+  </output>
+  <fault name="CXFault">
+   <SOAP:fault name="CXFault" use="literal"/>
+  </fault>
+ </operation>
+</binding>
+
+<service name="CXIf">
+ <documentation>gSOAP 2.7.8c generated service definition</documentation>
+ <port name="CXIf" binding="tns:CXIf">
+  <SOAP:address location="http://10.118.204.75:18276"/>
+ </port>
+</service>
+
+</definitions>

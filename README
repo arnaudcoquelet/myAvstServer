@@ -1,0 +1,11 @@
+Node.js Wrapper for AVST
+
+To start:
+node OpenTouchNode.js
+
+To debug:
+node --debug OpenTouchNode.js
+
+
+node-inspector &
+And open http://127.0.0.1:8080/debug?port=5858 in your favorite WebKit based browser
